@@ -1,0 +1,38 @@
+{% extends "article/base.html" %}
+{% block content %}
+
+<div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Articles</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/article/list">List</a></li>
+          <li><a href="/article/add">Add</a></li>
+        </ul>
+      </div>
+    </nav>
+
+        <div>
+            {% for article in articles %}
+                <div class="accordion">{{ article.title }}</div>
+                <div class="panel">
+                    <p>{{ article.content  }}</p>
+                    <hr/>
+                    <p>
+                        Author: {{ article.author  }} |
+                        Votes: <span class="badge">{{ article.votes  }} </span>
+                        <strong style="cursor:pointer" onclick="vote_article({{ article.id }})" data-toggle="Vote for this article">+1</strong>
+                    </p>
+
+                </div>
+            {% endfor %}
+
+            {% if not articles %}
+                No articles added yet!
+            {% endif %}
+        </div>
+
+</div>
+{% endblock content %}
